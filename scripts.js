@@ -22,6 +22,24 @@ function getHumanChoice (){
         getHumanChoice();
     }
 }
+/* Step 4: Scoring */
+let humanScore = 0;
+let computerScore = 0;
+let tieGame = 0;
+
+function scoring(){
+    console.log("Final Player Score: " + humanScore);
+    console.log("Final Computer Score: " + computerScore);
+    console.log("Tie Games: " + tieGame);
+    
+    if (humanScore > (computerScore && tieGame)){
+        console.log("Official Results: You Win! :)")
+    } else if (computerScore > (humanScore && tieGame)) {
+        console.log("Official Results: You Lose! :(")
+    } else {
+        console.log("Official Results: Tie Game. Try again!")
+    }
+}
 
 /* Step 5: Game Rules */
 function checkWinner(a,b){
@@ -34,66 +52,33 @@ function checkWinner(a,b){
     }
 }
 
-/* Step 4: Scoring 
-function scoring(){
-    playerScore = 0;
-    computerScore = 0;
-    tie = 0;
-
-    if (winner == "win"){
-        return playerScore + 1;
-    } else if (winner == "lose") {
-        return computerScore + 1;
-    } else if (winner == "tie") { 
-        return tie + 1;
-    }  
-
-        /*{
-        while (playerScore<1){
-        playerScore++};
-    } else if (winner == "lose"){
-        while (computerScore<1){
-        computerScore++};
-    } 
-   
-    console.log(playerScore);
-    console.log(computerScore);
-}*/
-
 /* Step 5: Play Single Round */
 function playRound(){
     humanChoice = getHumanChoice();
     computerChoice = getComputerChoice();
     winner = checkWinner (humanChoice, computerChoice);
+    if (winner == "win"){
+        return humanScore++;
+    } else if (winner == "lose"){
+        return computerScore++;
+    } else if (winner == "tie"){
+        return tieGame++;
+    }
 }
 
 /* Step 6: Play Game */
 function playGame(){
-    for (let i = 0; i<5;i++){
+    for (let round = 0; round<5;round++){
     playRound();
     console.log("You chose: " + humanChoice.charAt(0).toUpperCase() + humanChoice.slice(1));
     console.log("Computer chose: " + computerChoice.charAt(0).toUpperCase() + computerChoice.slice(1));
     console.log("Results: You " + winner + "!");
+    console.log(" ");
+    console.log("Your score: " + humanScore);
+    console.log("Computer score: " + computerScore);
     console.log(" ");
     }
 }
 
 playGame();
 scoring();
-
-function scoring (){
-let playerWins = 0;
-let compWins = 0;
-let tieGame = 0;
-    if (winner == "win"){
-        playerWins++
-    } else if (winner == "lose"){
-        compWins++
-    } else if (winner == "tie") {
-        tieGame++
-    }
-
-
-    console.log("Player: " + playerWins);
-    console.log("Comp: " + compWins);
-    console.log("Tie: " + tieGame);}
