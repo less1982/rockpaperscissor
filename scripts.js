@@ -10,11 +10,10 @@ function getComputerChoice(){
         return "scissors";
     }
 }
-computerChoice = getComputerChoice();
 
 /* Step 3: Player Choice */
 function getHumanChoice (){
-    b = prompt ("rock? paper? scissors?");
+    b = prompt ("Rock? Paper? Scissors?", "Enter here");
     b = b.toLowerCase();
 
     if ((b == "rock") || (b == "paper") || (b == "scissors")){
@@ -23,35 +22,78 @@ function getHumanChoice (){
         getHumanChoice();
     }
 }
-humanChoice = getHumanChoice();
 
-/* Step 5: Single Round */
-function playRound(){
-    if (humanChoice == computerChoice) {
+/* Step 5: Game Rules */
+function checkWinner(a,b){
+    if (a == b) {
     return "tie";
-    } else if (((humanChoice == "rock") && (computerChoice == "scissors")) || ((humanChoice == "paper") && (computerChoice == "rock")) || ((humanChoice == "scissors") && (computerChoice == "paper"))) {
+    } else if (((a == "rock") && (b == "scissors")) || ((a == "paper") && (b == "rock")) || ((a == "scissors") && (b == "paper"))) {
     return "win";
     } else {
     return "lose";
     }
 }
-results = playRound();
 
-/* Step 4: Scoring */
-humanScore = 0;
-computerScore = 0;
-if (results == "win") {
-    humanScore++;
-} else if (results == "lose") {
-    computerScore++;
+/* Step 4: Scoring 
+function scoring(){
+    playerScore = 0;
+    computerScore = 0;
+    tie = 0;
+
+    if (winner == "win"){
+        return playerScore + 1;
+    } else if (winner == "lose") {
+        return computerScore + 1;
+    } else if (winner == "tie") { 
+        return tie + 1;
+    }  
+
+        /*{
+        while (playerScore<1){
+        playerScore++};
+    } else if (winner == "lose"){
+        while (computerScore<1){
+        computerScore++};
+    } 
+   
+    console.log(playerScore);
+    console.log(computerScore);
+}*/
+
+/* Step 5: Play Single Round */
+function playRound(){
+    humanChoice = getHumanChoice();
+    computerChoice = getComputerChoice();
+    winner = checkWinner (humanChoice, computerChoice);
 }
 
-/* Step 6: Play Entire Game */
+/* Step 6: Play Game */
 function playGame(){
-    for (let i = 0; i <+5; i++) {
-    playRound();  
+    for (let i = 0; i<5;i++){
+    playRound();
+    console.log("You chose: " + humanChoice.charAt(0).toUpperCase() + humanChoice.slice(1));
+    console.log("Computer chose: " + computerChoice.charAt(0).toUpperCase() + computerChoice.slice(1));
+    console.log("Results: You " + winner + "!");
+    console.log(" ");
     }
 }
 
-results = playGame();
-console.log(results);
+playGame();
+scoring();
+
+function scoring (){
+let playerWins = 0;
+let compWins = 0;
+let tieGame = 0;
+    if (winner == "win"){
+        playerWins++
+    } else if (winner == "lose"){
+        compWins++
+    } else if (winner == "tie") {
+        tieGame++
+    }
+
+
+    console.log("Player: " + playerWins);
+    console.log("Comp: " + compWins);
+    console.log("Tie: " + tieGame);}
